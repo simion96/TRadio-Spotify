@@ -30,7 +30,9 @@ class Spotify:
         
     def getSongID(self, term, limit = 10, type = "track"):
         search = self.sp.search(term)
-        results = search["tracks"]["items"][0]["external_urls"]["spotify"][31:]
+        results = ""
+        if not (search["tracks"]["total"] == 0):
+            results = search["tracks"]["items"][0]["external_urls"]["spotify"][31:]
         return results
         
     
@@ -45,6 +47,7 @@ class Spotify:
         return playlistSongs
     
     def addSongs(self, source, new_song):
-        if (new_song not in source):
-            self.sp.user_playlist_add_tracks(self.username, self.playlist_id, [new_song])
+        if (new_song != "" and source != ""):
+            if (new_song not in source):
+                self.sp.user_playlist_add_tracks(self.username, self.playlist_id, [new_song])
 #https://open.spotify.com/user/1118158951/playlist/4uAEvLEhJLmzPmmCkIVBHF

@@ -3,7 +3,7 @@ from time import sleep
 from spotify import Spotify
 
 _spotify = Spotify()
-id = _spotify.getSongID("the definition of a rap flow")
+id = _spotify.getSongID("schoolboy q that part")
 songs = _spotify.getPlaylistSongs()
 _spotify.addSongs(songs, id)
 
