@@ -25,8 +25,7 @@ username = '1118158951'
 spotifyusername = 'spotifydiscover'
 playlist_id = '4uAEvLEhJLmzPmmCkIVBHF'
 
-new_song_id = []
-new_song_id.append("7jqPrUh6IR8nh7qM2gJyyl")
+new_song_id = "7jqPrUh6IR8nh7qM2gJyyl"
 #print clientID
 #print clientSecret
 
@@ -60,43 +59,10 @@ if token:
     
     print(playlistSongs)
     
-    if (new_song_id[0] not in playlistSongs):
+    if (new_song_id not in playlistSongs):
         print ("it wasnt here")
         print (new_song_id)
-        sp.user_playlist_add_tracks(username, playlist_id, new_song_id)
-    
-    
-    # sp.user_playlist_remove_all_occurrences_of_tracks(user = username, playlist_id = playlist_id, tracks = targetCurrSongs)
-    #
-    # counter = 0
-    # requestLimit = 0
-    # requested = False;
-    # for playlist in playlists:
-    #     playlist = sp.user_playlist(username, playlists[counter], fields='tracks, next')
-    #     playlistItems = playlist['tracks']['items']
-    #     for x in playlistItems:
-    #         sourceSongs.append(x['track']['uri'])
-    #     counter+=1
-    # print 'source uris: '
-    # print sourceSongs
-    #
-    #
-    #
-    # leftover = len(sourceSongs)
-    # limit = 100
-    # start = 0
-    # end = 99
-    # iterations = len(sourceSongs) / limit +1
-    # counter = 0;
-    # while counter < iterations :
-    #     if leftover < limit:
-    #         sp.user_playlist_add_tracks(username, playlist_id, sourceSongs)
-    #     else:
-    #         sp.user_playlist_add_tracks(username, playlist_id, sourceSongs[start:end])
-    #         start+=100
-    #         end+=100
-    #     counter+=1
-    #         #sp.user_playlist_add_tracks(username, playlist_id, targetCurrSongs)
+        sp.user_playlist_add_tracks(username, playlist_id, [new_song_id])
 
 else:
     print("Can't get token for", username)
