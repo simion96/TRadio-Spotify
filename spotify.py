@@ -10,10 +10,7 @@ import json
 #https://open.spotify.com/user/1118158951/playlist/4uAEvLEhJLmzPmmCkIVBHF
 
 if len(sys.argv) > 0:
-    #username = sys.argv[1]
     playlist_id = '4uAEvLEhJLmzPmmCkIVBHF'
-    #track_ids = ['spotify:track:1xalXygnuN9pA9NejSHfJV', '0PO7fVyPLMShxeh9OKjbWB']
-    #track_ids = sys.argv[3:]
 else:
     print("Usage: %s username playlist_id track_id ..." % (sys.argv[0],))
     sys.exit()
@@ -26,12 +23,10 @@ spotifyusername = 'spotifydiscover'
 playlist_id = '4uAEvLEhJLmzPmmCkIVBHF'
 
 new_song_id = "7jqPrUh6IR8nh7qM2gJyyl"
-#print clientID
-#print clientSecret
 
 scope = 'playlist-modify-public'
 token = util.prompt_for_user_token(username, scope, client_id = clientID, client_secret = clientSecret, redirect_uri = redirect)
-#
+
 # #doshit
 # #username - 1118158951
 targetCurrSongs = []
@@ -40,8 +35,7 @@ sourceSongs = []
 if token:
     sp = spotipy.Spotify(auth=token)
     sp.trace = False
-
-
+    
     #mainPlaylist = sp.user_playlist(username, playlist_id, fields='tracks, next')
     #items = mainPlaylist['tracks']['items']
 
@@ -55,13 +49,10 @@ if token:
     playlists = sp.user_playlist(username, playlist_id, fields="tracks, next")
     for song in playlists["tracks"]["items"]:
         playlistSongs.append(song["track"]["id"])
-        #print(song["track"]["id"])
     
     print(playlistSongs)
     
     if (new_song_id not in playlistSongs):
-        print ("it wasnt here")
-        print (new_song_id)
         sp.user_playlist_add_tracks(username, playlist_id, [new_song_id])
 
 else:
