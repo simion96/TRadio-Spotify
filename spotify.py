@@ -1,7 +1,6 @@
 import pprint
 import sys
 import os
-
 import spotipy
 import spotipy.util as util
 import json
@@ -17,17 +16,9 @@ class Spotify:
         self.new_song_id = "7jqPrUh6IR8nh7qM2gJyyl"
         self.scope = "playlist-modify-public"
         self.token = util.prompt_for_user_token(self.username, self.scope, client_id = self.clientID, client_secret = self.clientSecret, redirect_uri = self.redirect)
-        #try:
-        #    self.token = util.prompt_for_user_token(self.username, self.scope, client_id = self.clientID, client_secret = self.clientSecret, redirect_uri = self.redirect)
-        #except Exception as e:
-        #    print("MEssage:" +e)
-        #    print("e args" + e.args)
-        #if (self.token):
-        #    raise Exception("the authentication token is empty")
         self.sp = spotipy.Spotify(auth=self.token)
         self.sp.trace = False
-        
-        
+          
     def getSongID(self, term, limit = 10, type = "track"):
         search = self.sp.search(term)
         results = ""
@@ -43,7 +34,6 @@ class Spotify:
         playlistResults = self.sp.user_playlist(self.username, self.playlist_id, fields)
         for song in playlistResults["tracks"]["items"]:
             playlistSongs.append(song["track"]["id"])
-        
         return playlistSongs
     
     def addSongs(self, source, new_song):
